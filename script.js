@@ -1,56 +1,159 @@
-const prendas = [
-{ nombre: "Vestido Oversize", puntuacion: 0 },
-{ nombre: "Blazer Minimalista", puntuacion: 0 },
-{ nombre: "Outfit Y2K", puntuacion: 0 },
-{ nombre: "Streetwear Urbano", puntuacion: 0 },
-{ nombre: "Moda Sostenible", puntuacion: 0 },
-{ nombre: "Estilo Coquette", puntuacion: 0 },
-{ nombre: "Total Black Elegante", puntuacion: 0 },
-{ nombre: "Athleisure", puntuacion: 0 }
+// Lista de estilos (adaptación del algoritmo base)
+let fashionStyles = [
+    { name: "Minimalista", score: 0 },
+    { name: "Streetwear", score: 0 },
+    { name: "Vintage", score: 0 },
+    { name: "Y2K", score: 0 },
+    { name: "Formal Elegante", score: 0 },
+    { name: "Boho", score: 0 },
+    { name: "Athleisure", score: 0 }
 ];
 
-let indiceA, indiceB;
+let totalRounds = 0;
+let maxRounds = 10;
+let currentOptionA;
+let currentOptionB;
 
-function getRandomIndices() {
-indiceA = Math.floor(Math.random() * prendas.length);
-do {
-indiceB = Math.floor(Math.random() * prendas.length);
-} while (indiceA === indiceB);
+// Función para seleccionar dos estilos aleatorios
+function getRandomComparison() {
+
+    let shuffled = fashionStyles.sort(() => 0.5 - Math.random());
+
+    currentOptionA = shuffled[0];
+    currentOptionB = shuffled[1];
+
+    document.getElementById("optionA").innerText = currentOptionA.name;
+    document.getElementById("optionB").innerText = currentOptionB.name;
 }
 
-function mostrarOpciones() {
-getRandomIndices();
-document.getElementById("optionA").innerText = prendas[indiceA].nombre;
-document.getElementById("optionB").innerText = prendas[indiceB].nombre;
+// Función cuando el usuario vota
+function vote(choice) {
+
+    if (choice === "A") {
+        currentOptionA.score++;
+    } else {
+        currentOptionB.score++;
+    }
+
+    totalRounds++;
+
+    if (totalRounds >= maxRounds) {
+        showRanking();
+    } else {
+        getRandomComparison();
+    }
 }
 
-function selectOption(opcion) {
-if (opcion === 0) {
-prendas[indiceA].puntuacion++;
-} else {
-prendas[indiceB].puntuacion++;
+// Mostrar ranking final
+function showRanking() {
+
+    document.getElementById("comparison").style.display = "none";
+    document.getElementById("results").style.display = "block";
+
+    fashionStyles.sort((a, b) => b.score - a.score);
+
+    let rankingList = document.getElementById("ranking");
+    rankingList.innerHTML = "";
+
+    fashionStyles.forEach(style => {
+        let li = document.createElement("li");
+        li.innerText = style.name + " - " + style.score + " votos";
+        rankingList.appendChild(li);
+    });
 }
 
-```
-actualizarRanking();
-mostrarOpciones();
-```
+// Reiniciar algoritmo
+function restart() {
 
+    fashionStyles.forEach(style => style.score = 0);
+
+    totalRounds = 0;
+
+    document.getElementById("comparison").style.display = "block";
+    document.getElementById("results").style.display = "none";
+
+    getRandomComparison();
 }
 
-function actualizarRanking() {
-const ranking = [...prendas].sort((a, b) => b.puntuacion - a.puntuacion);
-const rankingList = document.getElementById("ranking");
-rankingList.innerHTML = "";
+// Iniciar primera comparación
+getRandomComparison();
+// Lista de estilos (adaptación del algoritmo base)
+let fashionStyles = [
+    { name: "Minimalista", score: 0 },
+    { name: "Streetwear", score: 0 },
+    { name: "Vintage", score: 0 },
+    { name: "Y2K", score: 0 },
+    { name: "Formal Elegante", score: 0 },
+    { name: "Boho", score: 0 },
+    { name: "Athleisure", score: 0 }
+];
 
-```
-ranking.forEach((prenda, index) => {
-    const li = document.createElement("li");
-    li.innerText = `${index + 1}. ${prenda.nombre} - ${prenda.puntuacion} puntos`;
-    rankingList.appendChild(li);
-});
-```
+let totalRounds = 0;
+let maxRounds = 10;
+let currentOptionA;
+let currentOptionB;
 
+// Función para seleccionar dos estilos aleatorios
+function getRandomComparison() {
+
+    let shuffled = fashionStyles.sort(() => 0.5 - Math.random());
+
+    currentOptionA = shuffled[0];
+    currentOptionB = shuffled[1];
+
+    document.getElementById("optionA").innerText = currentOptionA.name;
+    document.getElementById("optionB").innerText = currentOptionB.name;
 }
 
-mostrarOpciones();
+// Función cuando el usuario vota
+function vote(choice) {
+
+    if (choice === "A") {
+        currentOptionA.score++;
+    } else {
+        currentOptionB.score++;
+    }
+
+    totalRounds++;
+
+    if (totalRounds >= maxRounds) {
+        showRanking();
+    } else {
+        getRandomComparison();
+    }
+}
+
+// Mostrar ranking final
+function showRanking() {
+
+    document.getElementById("comparison").style.display = "none";
+    document.getElementById("results").style.display = "block";
+
+    fashionStyles.sort((a, b) => b.score - a.score);
+
+    let rankingList = document.getElementById("ranking");
+    rankingList.innerHTML = "";
+
+    fashionStyles.forEach(style => {
+        let li = document.createElement("li");
+        li.innerText = style.name + " - " + style.score + " votos";
+        rankingList.appendChild(li);
+    });
+}
+
+// Reiniciar algoritmo
+function restart() {
+
+    fashionStyles.forEach(style => style.score = 0);
+
+    totalRounds = 0;
+
+    document.getElementById("comparison").style.display = "block";
+    document.getElementById("results").style.display = "none";
+
+    getRandomComparison();
+}
+
+// Iniciar primera comparación
+getRandomComparison();
+
