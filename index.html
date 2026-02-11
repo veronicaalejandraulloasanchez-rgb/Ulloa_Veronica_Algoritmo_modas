@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>FashionMash - Algoritmo de Tendencias</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>FashionMash - Algoritmo de Recomendación</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-```
-<div class="container">
-    <h1>👗 FashionMash</h1>
-    <p>Elige el estilo que más te guste</p>
+    <h1>FashionMash 👗</h1>
+    <p>¿Qué estilo de moda crees que tendrá más impacto este año?</p>
 
-    <div class="comparison">
-        <button id="optionA" onclick="selectOption(0)"></button>
-        <button id="optionB" onclick="selectOption(1)"></button>
+    <div id="comparison">
+        <button id="optionA" onclick="vote('A')"></button>
+        <span class="vs">VS</span>
+        <button id="optionB" onclick="vote('B')"></button>
     </div>
 
-    <h2>🏆 Ranking de Tendencias</h2>
-    <ul id="ranking"></ul>
-</div>
+    <div id="results" style="display:none;">
+        <h2>Ranking Final</h2>
+        <ul id="ranking"></ul>
+        <button onclick="restart()">Reiniciar</button>
+    </div>
 
-<script src="script.js"></script>
-```
+    <script src="script.js"></script>
 
 </body>
 </html>
+
